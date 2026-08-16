@@ -52,19 +52,22 @@ function App() {
             name="name"
             placeholder="Enter your name..."
             className="input"
-            onChange={getFieldValue} />
+            onChange={getFieldValue}
+            required />
 
           <input type="email"
             name="email"
             placeholder="Enter your email..."
             className="input"
-            onChange={getFieldValue} />
+            onChange={getFieldValue}
+            required />
 
           <input type="password"
             name="password"
             placeholder="password"
             className="input"
-            onChange={getFieldValue} />
+            onChange={getFieldValue}
+            required />
 
           <input type="submit"
             value="SUBMIT"
