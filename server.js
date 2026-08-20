@@ -48,6 +48,68 @@ app.post("/users", (req, res) => {
         })
 })
 
+//------------------------ send data to front-end -----------------------------
+
+app.get("/users", (req, res) => {
+    User.find()
+        .then((result) => {
+            res.send(JSON.stringify(result))
+            console.log(result)
+        })
+        .catch((err) => {
+            console.log("error", err)
+        })
+})
+
+
+// ================edit records========================
+
+app.put("/users/:id", (req, res) => {
+    User.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        {
+            new: true,
+            runValidators: true
+        }
+    )
+        .then((result) => {
+            res.json({
+                message: "User updated Successdully",
+                user: result
+            })
+        })
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json({
+                message: "Error updating user",
+                error: err.message
+            })
+        })
+})
+
+// ======================delete record===========================
+
+app.delete("users/:id",(req,res) =>{
+    User.findByIdAndDelete(req.params.id)
+    .then((result) =>{
+        console.log(req.params.id)
+        res.json(
+            {
+                message : "Record Delete Successfully...."
+            }
+        )
+    })
+    .catch((err) =>{
+        console.log(err);
+        res.status(500).json({
+            message : "Error Deleting User",
+            error : err.message
+        })
+    })
+})
+
+
 app.listen(5000, () => {
     console.log("Server Running on http://localhost:5000");
 });
